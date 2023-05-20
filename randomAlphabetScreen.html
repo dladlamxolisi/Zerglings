@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Zergling Rush</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <section id="gameControls">
+      <h2 id="turnDisplay"></h2>
+      <br>
+      <section id="pickLetterScreen">
+        <h2>Pick a Random Letter</h2>
+        <div id="alphabetContainer"></div>
+        <button id="stopButton" onclick="stopRandomAlphabet()">Stop</button>
+        <h3 id="pickedLetterDisplay"></h3>
+        <button id="rushButton" onclick="moveToQuestionScreen()">Rush!</button>
+      </section>
+    </section>
+  </div>
+
+  <script>
+    // Start the random alphabet animation on page load
+    window.onload = startRandomAlphabetAnimation;
+  </script>
+</body>
+</html>

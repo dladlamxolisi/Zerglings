@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Zergling Rush</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <section id="registrationScreen">
+      <div class="registrationFormContainer">
+        <h2>Player Registration</h2>
+        <form id="registrationForm" onsubmit="return false;">
+          <label for="playerName1">Player 1 Name:</label>
+          <input type="text" id="playerName1" required>
+          <br><br>
+          <label for="playerName2">Player 2 Name:</label>
+          <input type="text" id="playerName2" required>
+          <br><br>
+          <button id="btnContinue" onclick="registerPlayers()">Continue</button>
+        </form>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+/* Body and General Styles */
+body {
+  background-color: #0f0f2b;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#welcomeScreen, #registrationScreen, #gameControls {
+  background: linear-gradient(to bottom right, rgb(255, 0, 0), rgba(85, 81, 81, 0.8), rgba(255, 0, 0, 0.8));
+  padding: 40px;
+  border-radius: 10px;
+  width: 70%;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  margin-top: 0;
+}
+
+p {
+  font-size: 18px;
+}
+
+ol {
+  text-align: left;
+  margin: 20px 0;
+  padding-left: 20px;
+}
+
+button#btnAgree, button[type="submit"], #btnContinue {
+  background-color: #393838;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+button#btnAgree:hover, button[type="submit"]:hover, #btnContinue:hover {
+  background-color: #323030;
+}
+
+button[type="submit"]:disabled, #btnContinue:disabled {
+  background-color: #ff0000;
+  cursor: not-allowed;
+}
+
+/* Registration Screen Styles */
+.registrationFormContainer {
+  width: 100%;
+}
+
+h2 {
+  font-size: 24px;
+  margin-top: 0;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* Random Alphabet Screen Styles */
+#gameControls {
+  text-align: center;
+}
+
+#pickLetterScreen {
+  margin-top: 20px;
+}
+
+#alphabetContainer {
+  font-size: 72px; /* Adjust the font size as desired */
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#alphabetContainer span {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-weight: bold;
+  margin: 5px;
+  border-radius: 50%;
+  color: #ffffff;
+  background-color: rgb(0, 0, 0);
+}
+
+#stopButton,
+#rushButton {
+  background-color: #393838;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+#stopButton:hover,
+#rushButton:hover {
+  background-color: #323030;
+}
+
+/* Background with Moving Alphabets */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background: url("alphabets.jpg") repeat;
+  opacity: 0.6;
+  animation: moveAlphabets 20s infinite linear;
+}
+
+@keyframes moveAlphabets {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}

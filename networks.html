@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Zergling rush</title>
+</head>
+<body>
+  <div id="game-state"></div>
+  <div id="winner"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.min.js"></script>
+  <script>
+    var socket = io("ws://localhost:8080");
+
+    socket.on("connect", function() {
+      // Send the current game state to the server.
+      socket.emit("game-state", JSON.stringify(gameState));
+    });
+
+    socket.on("game-state", function(data) {
+      // Update the game state for all players.
+      gameState = data;
+    });
+
+    function makeMove(player, piece, position) {
+      // Send the move to the server.
+      socket.emit("make-move", {
+        player: player,
+        piece: piece,
+        position: position
+      });
+    }
+
+    function onGameOver(winner) {
+      // Display a message indicating the winner.
+      document.getElementById("winner").innerHTML = winner;
+    }
+  </script>
+</body>
+</html>
