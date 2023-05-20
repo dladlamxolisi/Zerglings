@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+  <title>Scoreboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    
+    h1 {
+      margin-top: 50px;
+    }
+    
+    .score {
+      display: inline-block;
+      margin: 20px;
+    }
+    
+    .winner {
+      font-weight: bold;
+      font-size: 24px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Scoreboard</h1>
+  
+  <div class="score">
+    <h2>Player 1</h2>
+    <p id="player1Score">0</p>
+  </div>
+  
+  <div class="score">
+    <h2>Player 2</h2>
+    <p id="player2Score">0</p>
+  </div>
+  
+  <h2 class="winner" id="winnerMessage"></h2>
+  <script >
+    // Score Section
+        let aP1=["Karabo","Kenya","Koegnisegg"];
+        let aP2 = ["Anya","Bingo","Anat"];
+        let lP1="K";
+        let lP2= "A";
+        updateScores(aP1,aP2,lP1,lP2);
+        function updateScores(answerP1,answerP2,letterP1,letterP2) {
+        var player1Score = parseInt(document.getElementById("player1Score").textContent);
+        var player2Score = parseInt(document.getElementById("player2Score").textContent);
+        
+        // Update the scores player 1
+        
+        if(answerP1[0][0]== letterP1)
+        {
+            player1Score=player1Score + 10;
+        }
+        if(answerP1[1][0]== letterP1)
+        {
+            player1Score=player1Score + 40;
+        }
+        if(answerP1[2][0]== letterP1)
+        {
+            player1Score=player1Score + 50;
+        }
+
+        // Update the scores player 1
+        if(answerP2[0][0]== letterP2)
+        {
+            player2Score=player2Score + 10;
+        }
+        if(answerP2[1][0]== letterP2)
+        {
+            player2Score=player2Score + 40;
+        }
+        if(answerP2[2][0]== letterP2)
+        {
+            player2Score=player2Score + 50;
+        }
+        document.getElementById("player1Score").textContent=player1Score;
+        document.getElementById("player2Score").textContent=player2Score;
+        // Check for the winner
+        if (player1Score  >player2Score) {
+            document.getElementById("winnerMessage").textContent = "Player 1 wins!";
+        } else if (player2Score == player1Score) {
+            document.getElementById("winnerMessage").textContent = "Tie!";
+        }else{
+            document.getElementById("winnerMessage").textContent = "Player 2 wins!";
+        }
+        }
+
+        // Call the updateScores function whenever a score is clicked
+        var scoreElements = document.getElementsByClassName("score");
+        for (var i = 0; i < scoreElements.length; i++) {
+        scoreElements[i].addEventListener("click", updateScores);
+        }
+  </script>
+  
+</body>
+</html>
