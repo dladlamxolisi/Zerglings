@@ -12,27 +12,20 @@
       <div class="registrationFormContainer">
         <h2>Player Registration</h2>
         <form id="registrationForm" onsubmit="return false;">
-          <label for="playerName1">Player 1 Name:</label>
-          <input class ="playReg" type="text" id="playerName1" required>
+          <label for="playerName2">Player 2 Name:</label>
+          <input class ="play2Reg" type="text" id="playerName2" required>
           <br><br>
-          <button id="btnContinue" onclick="moveToNextScreen();">Continue</button>
+          <button id="btnContinue" onclick="registerPlayers()">Continue</button>
         </form>
       </div>
     </section>
   </div>
- 
+  <script src="script.js"></script>
   <script>
-   
-      function moveToNextScreen() {
-      // Logic to navigate to the next screen
-      // Replace the following line with the appropriate navigation code
-      localStorage.setItem('player1Name',player1Name );
-      window.location.href = 'player2Registration.html';
-    }
     const socket = io();
   
     // Get the code editor elements
-    const editors = document.getElementsByClassName('playReg');
+    const editors = document.getElementsByClassName('playReg2');
   
     // Add event listeners to each editor
     for (let i = 0; i < editors.length; i++) {

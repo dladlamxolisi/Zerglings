@@ -9,14 +9,14 @@
 <body>
   <div class="container">
     <section id="gameControls">
-      <h2 id="turnDisplay" ></h2>
+      <h2 id="turnDisplay"></h2>
       <br>
-      <section class ="pickL" id="pickLetterScreen">
-        <h2 class ="pickL">PLAYER 1 Pick a Random Letter</h2>
+      <section id="pickLetterScreen">
+        <h2>PLAYER 2 Pick a Random Letter</h2>
         <div id="alphabetContainer"></div>
-        <button class ="pickL" id="stopButton" onclick="stopRandomAlphabet()">Stop</button>
-        <h3 class ="pickL" id="pickedLetterDisplay"></h3>
-        <button class ="pickL" id="rushButton" onclick="moveToQuestionScreen()">Rush!</button>
+        <button id="stopButton" onclick="stopRandomAlphabet()">Stop</button>
+        <h3 id="pickedLetterDisplay"></h3>
+        <button id="rushButton" onclick="moveToQuestionScreen()">Rush!</button>
       </section>
     </section>
   </div>
@@ -30,7 +30,7 @@
   const socket = io();
 
   // Get the code editor elements
-  const editors = document.getElementsByClassName('pickL');
+  const editors = document.getElementsByClassName('playReg');
 
   // Add event listeners to each editor
   for (let i = 0; i < editors.length; i++) {

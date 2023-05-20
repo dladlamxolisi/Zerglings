@@ -11,13 +11,24 @@ var chosenAlphabet = localStorage.getItem('player1Name');
 
 // Function to register players
 function registerPlayers() {
-  var playerName1 = document.getElementById('playerName1').value;
+ 
+  // Validate player names
+  if (localStorage.getItem('player1Name')) {
+    // Logic to navigate to the random alphabet screen
+    registerPlayers2();
+  } else {
+    alert('Please enter both player names.');
+  }
+}
+
+function registerPlayers2() {
+  
   var playerName2 = document.getElementById('playerName2').value;
 
   // Validate player names
-  if (playerName1 && playerName2) {
+  if ( playerName2) {
     // Save player names in localStorage
-    localStorage.setItem('player1Name', playerName1);
+   
     localStorage.setItem('player2Name', playerName2);
 
     // Logic to navigate to the random alphabet screen
@@ -129,7 +140,7 @@ function submitAnswers() {
   })) {
     // Logic to process the answers
     // Replace this with your custom logic
-
+    updateScores(answers,)
     // Clear the input fields
     answerInputs.forEach(function(input) {
       input.value = '';

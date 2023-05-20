@@ -4,6 +4,7 @@
   <title>Zergling Rush - Questions</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
+  
 </head>
 <body>
   <div class="container">
@@ -12,7 +13,7 @@
       <br>
       <section id="questionScreen">
         <h2>Answer the Questions</h2>
-        <div id="questionsContainer"></div>
+        <div class="questions" id="questionsContainer"></div>
         <button id="submitAnswersButton" onclick="submitAnswers()">Submit Answers</button>
         <div id="timerContainer">
           <h3>Time Remaining: <span id="timer">01:00</span></h3>
@@ -24,7 +25,7 @@
   <script>
     // Global Variables
     var questionsContainer = document.getElementById('questionsContainer');
-    var turnDisplay = document.getElementById('turnDisplay');
+    var turnDisplay = document.getElementById("turnDisplay");
     var timer = document.getElementById('timer');
     var timerInterval;
     var startTime;
@@ -37,7 +38,9 @@
     var chosenAlphabet = localStorage.getItem('chosenAlphabet');
 
     // Set player name at the top of the questions screen
-    turnDisplay.textContent = player1Name + "'s Turn";
+
+
+    turnDisplay.textContent = "Player 1" + "'s Turn";
 
     // Function to generate the questions
     function generateQuestions() {
@@ -128,6 +131,33 @@
     // Call the necessary functions
     generateQuestions();
     startPlayerTurn();
+  </script>
+
+<script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+  
+    // Get the code editor elements
+    const editors = document.getElementsByClassName('questions');
+  
+    // Add event listeners to each editor
+    for (let i = 0; i < editors.length; i++) {
+      const editor = editors[i];
+      editor.addEventListener('input', (event) => {
+        const code = event.target.value;
+        socket.emit('code-change', code);
+      });
+    }
+  
+    // Receive code changes from the server
+    socket.on('code-change', (code) => {
+      for (let i = 0; i < editors.length; i++) {
+        const editor = editors[i];
+        if (editor !== document.activeElement) {
+          editor.value = code;
+        }
+      }
+    });
   </script>
 </body>
 </html>
