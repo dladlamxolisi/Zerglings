@@ -1,59 +1,18 @@
-<!DOCTYPE html>
-<html>
 <head>
   <title>Zergling Rush</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
+<!-- Player 1 Registration Screen -->
+<section id="player1RegistrationScreen">
+  <h2>Player 1 Registration</h2>
+  <input type="text" id="playerName1" placeholder="Enter Player 1 Name">
+  <button onclick="registerPlayer1()">Register</button>
+</section>
+
+<!-- Player 2 Registration Screen -->
+<section id="player2RegistrationScreen">
+  <h2>Player 2 Registration</h2>
+  <input type="text" id="playerName2" placeholder="Enter Player 2 Name">
+  <button onclick="registerPlayer2()">Register</button>
+</section>
 </head>
-<body>
-  <div id="pReg" class="container">
-    <section id="registrationScreen">
-      <div class="registrationFormContainer">
-        <h2>Player Registration</h2>
-        <form id="registrationForm" onsubmit="return false;">
-          <label for="playerName1">Player 1 Name:</label>
-          <input class ="playReg" type="text" id="playerName1" required>
-          <br><br>
-          <button id="btnContinue" onclick="moveToNextScreen();">Continue</button>
-        </form>
-      </div>
-    </section>
-  </div>
- 
-  <script>
-   
-      function moveToNextScreen() {
-      // Logic to navigate to the next screen
-      // Replace the following line with the appropriate navigation code
-      localStorage.setItem('player1Name',player1Name );
-      window.location.href = 'player2Registration.html';
-    }
-    const socket = io();
-  
-    // Get the code editor elements
-    const editors = document.getElementsByClassName('playReg');
-  
-    // Add event listeners to each editor
-    for (let i = 0; i < editors.length; i++) {
-      const editor = editors[i];
-      editor.addEventListener('input', (event) => {
-        const code = event.target.value;
-        socket.emit('code-change', code);
-      });
-    }
-  
-    // Receive code changes from the server
-    socket.on('code-change', (code) => {
-      for (let i = 0; i < editors.length; i++) {
-        const editor = editors[i];
-        if (editor !== document.activeElement) {
-          editor.value = code;
-        }
-      }
-    });
-  </script>
-  
-  
-</body>
-</html>

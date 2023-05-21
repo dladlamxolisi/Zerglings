@@ -3,8 +3,6 @@
 <head>
   <title>Zergling Rush - Questions</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
-  
 </head>
 <body>
   <div class="container">
@@ -12,20 +10,19 @@
       <h2 id="turnDisplay"></h2>
       <br>
       <section id="questionScreen">
-        <h2>Answer the Questions</h2>
-        <div class="questions" id="questionsContainer"></div>
-        <button id="submitAnswersButton" onclick="submitAnswers()">Submit Answers</button>
-        <div id="timerContainer">
-          <h3>Time Remaining: <span id="timer">01:00</span></h3>
-        </div>
+        <h2>Questions</h2>
+        <div id="questionsContainer"></div>
+        <button id="submitAnswersButton">Submit</button>
+        <h3 id="timer"></h3>
       </section>
     </section>
   </div>
-  
+
+  <script src="script.js"></script>
   <script>
     // Global Variables
     var questionsContainer = document.getElementById('questionsContainer');
-    var turnDisplay = document.getElementById("turnDisplay");
+    var turnDisplay = document.getElementById('turnDisplay');
     var timer = document.getElementById('timer');
     var timerInterval;
     var startTime;
@@ -38,9 +35,7 @@
     var chosenAlphabet = localStorage.getItem('chosenAlphabet');
 
     // Set player name at the top of the questions screen
-
-
-    turnDisplay.textContent = "Player 1" + "'s Turn";
+    turnDisplay.textContent = player1Name + "'s Turn";
 
     // Function to generate the questions
     function generateQuestions() {
@@ -119,45 +114,50 @@
       var answers = [];
 
       for (var i = 0; i < answerInputs.length; i++) {
-        answers.push(answerInputs[i].value.trim());
+      answers.push(answerInputs[i].value.trim());
       }
 
       // Perform the necessary logic with the answers
       console.log(answers);
 
-      // Move to the next screen or perform other actions as needed*/
+      // Clear the input fields
+      for (var i = 0; i < answerInputs.length; i++) {
+      answerInputs[i].value = '';
+      }
+
+      // Set the next player's turn
+      setNextPlayerTurn();
+
+      // Move to the next screen or perform other actions as needed
+      moveToRandomLetterScreen();
     }
+
+    // Function to set the next player's turn
+    function setNextPlayerTurn() {
+      var currentPlayer = localStorage.getItem('currentPlayer');
+      var nextPlayer;
+
+      if (currentPlayer === 'player1') {
+        nextPlayer = 'player2';
+      } else {
+        nextPlayer = 'player1';
+      }
+
+      localStorage.setItem('currentPlayer', nextPlayer);
+    }
+
+    // Function to move to the random letter screen
+    function moveToRandomLetterScreen() {
+     window.location.href = 'randomLetterScreen.html';
+    }
+
+    // Bind the submitAnswers function to the submit button click event
+    var submitButton = document.getElementById('submitAnswersButton');
+    submitButton.addEventListener('click', submitAnswers);
 
     // Call the necessary functions
     generateQuestions();
     startPlayerTurn();
-  </script>
-
-<script src="/socket.io/socket.io.js"></script>
-  <script>
-    const socket = io();
-  
-    // Get the code editor elements
-    const editors = document.getElementsByClassName('questions');
-  
-    // Add event listeners to each editor
-    for (let i = 0; i < editors.length; i++) {
-      const editor = editors[i];
-      editor.addEventListener('input', (event) => {
-        const code = event.target.value;
-        socket.emit('code-change', code);
-      });
-    }
-  
-    // Receive code changes from the server
-    socket.on('code-change', (code) => {
-      for (let i = 0; i < editors.length; i++) {
-        const editor = editors[i];
-        if (editor !== document.activeElement) {
-          editor.value = code;
-        }
-      }
-    });
   </script>
 </body>
 </html>
