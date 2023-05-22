@@ -24,6 +24,7 @@
       color: red;
     }
   </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Scoreboard</h1>
@@ -37,14 +38,18 @@
     <h2>Player 2</h2>
     <p id="player2Score">0</p>
   </div>
+
+  <p>
+    <button onclick="window.location.href = 'randomAlphabetScreen.html'">Play Again</button>
+  </p>
   
   <h2 class="winner" id="winnerMessage"></h2>
   <script >
     // Score Section
-        let aP1=["Karabo","Kenya","Koegnisegg"];
-        let aP2 = ["Anya","Bingo","Anat"];
-        let lP1="K";
-        let lP2= "A";
+        let aP1=localStorage.getItem("answers1");
+        let aP2=localStorage.getItem("answers2");
+        let lP1= localStorage.getItem("pickedL");
+        let lP2= localStorage.getItem("pickedL2");
         updateScores(aP1,aP2,lP1,lP2);
         function updateScores(answerP1,answerP2,letterP1,letterP2) {
         var player1Score = parseInt(document.getElementById("player1Score").textContent);

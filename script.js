@@ -7,6 +7,7 @@ var pickedLetterDisplay = document.getElementById('pickedLetterDisplay');
 var rushButton = document.getElementById('rushButton');
 var chosenAlphabet = localStorage.getItem('player1Name');
 
+
 // Function for Player 1 registration
 function registerPlayer1() {
   var playerName1 = document.getElementById('playerName1').value;
@@ -16,6 +17,7 @@ function registerPlayer1() {
     // Save player name in local storage
     localStorage.setItem('player1Name', playerName1);
     localStorage.setItem('currentPlayer', 'player1');
+     console.log(localStorage.getItem("currentPlayer"));
 
     // Hide Player 1 registration screen
     player1RegistrationScreen.style.display = 'none';
@@ -36,7 +38,7 @@ function registerPlayer2() {
   if (playerName2) {
     // Save player name in local storage
     localStorage.setItem('player2Name', playerName2);
-
+    
     // Navigate to the random alphabet screen or any other desired screen
     window.location.href = 'randomAlphabetScreen.html';
   } else {
@@ -109,13 +111,22 @@ function stopRandomAlphabet() {
   // Get the picked letter
   pickedLetter = document.getElementById('alphabetContainer').innerText;
   document.getElementById('pickedLetterDisplay').innerText = 'Picked Letter: ' + pickedLetter;
+  
 }
 
 // Function to move to the question screen
 function moveToQuestionScreen() {
   // Logic to navigate to the question screen
   // Replace the following line with the appropriate navigation code
-  window.location.href = 'questionScreen.html';
+  let cPlayer = localStorage.getItem("currentPlayer");
+  if(cPlayer=='player1')
+  {
+    window.location.href = 'questionScreen.html';
+  }else{
+    window.location.href = 'questionScreen2.html';
+  }
+  
+  
 }
 
 // Function to generate random color
@@ -153,7 +164,7 @@ function submitAnswers() {
   })) {
     // Logic to process the answers
     // Replace this with your custom logic
-
+    localStorage.setItem('answers1',answers);
     // Clear the input fields
     answerInputs.forEach(function(input) {
       input.value = '';
@@ -164,6 +175,39 @@ function submitAnswers() {
     if (currentPlayer === 'player1') {
       localStorage.setItem('currentPlayer', 'player2');
       window.location.href = 'randomAlphabetScreen.html';
+    } else {
+      // Both players have played, navigate to the results screen or any other desired screen
+      window.location.href = 'resultsScreen.html';
+    }
+  } else {
+    alert('Please answer all the questions.');
+  }
+}
+
+// Function to handle submitting the answers
+function submitAnswers2() {
+  var answerInputs = document.querySelectorAll('.answer-input');
+  var answers = Array.from(answerInputs).map(function(input) {
+    return input.value.trim();
+  });
+
+  // Validate if all answers are provided
+  if (answers.every(function(answer) {
+    return answer !== '';
+  })) {
+    // Logic to process the answers
+    // Replace this with your custom logic
+    localStorage.setItem('answers2',answers);
+    // Clear the input fields
+    answerInputs.forEach(function(input) {
+      input.value = '';
+    });
+
+    // Save current player and navigate to random letter screen for the next player's turn
+    var currentPlayer = localStorage.getItem('currentPlayer');
+    if (currentPlayer === 'player1') {
+      localStorage.setItem('currentPlayer', 'player2');
+      window.location.href = 'score.html';
     } else {
       // Both players have played, navigate to the results screen or any other desired screen
       window.location.href = 'resultsScreen.html';

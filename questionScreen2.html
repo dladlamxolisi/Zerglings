@@ -12,7 +12,7 @@
       <section id="questionScreen">
         <h2>Questions</h2>
         <div id="questionsContainer"></div>
-        <button onclick="submitAnswers()" id="submitAnswersButton">Submit</button>
+        <button onclick="submitAnswers2()" id="submitAnswersButton">Submit</button>
         <h3 id="timer"></h3>
       </section>
     </section>
@@ -29,13 +29,13 @@
     var remainingTime = 60; // 1 minute in seconds
 
     // Get player name from player registration screen
-    var player1Name = localStorage.getItem('player1Name');
+    var player2Name = localStorage.getItem('player2Name');
 
     // Get chosen alphabet from localStorage
     var chosenAlphabet = localStorage.getItem('chosenAlphabet');
 
     // Set player name at the top of the questions screen
-    turnDisplay.textContent = player1Name + "'s Turn";
+    turnDisplay.textContent = player2Name + "'s Turn";
 
     // Function to generate the questions
     function generateQuestions() {
@@ -109,27 +109,25 @@
     }
 
     // Function to submit the answers
-    function submitAnswers(event) {
-      var answerInputs = document.getElementsByClassName('answer-input');
-      var answers = [];
+    function submitAnswers2() {
+      var answerInputs2 = document.getElementsByClassName('answer-input');
+      var answers2 = [];
 
-      for (var i = 0; i < answerInputs.length; i++) {
-      answers.push(answerInputs[i].value.trim());
+      for (var i = 0; i < answerInputs2.length; i++) {
+      answers2.push(answerInputs2[i].value.trim());
       }
 
       // Perform the necessary logic with the answers
-      console.log(answers);
+      console.log(answers2);
 
       // Clear the input fields
-      for (var i = 0; i < answerInputs.length; i++) {
-      answerInputs[i].value = '';
+      for (var i = 0; i < answerInputs2.length; i++) {
+      answerInputs2[i].value = '';
       }
-      localStorage.setItem("Answers",answers);
+      localStorage.setItem("Answers2",answers2);
       // Set the next player's turn
-      setNextPlayerTurn();
-      localStorage.setItem("turn","yes");
-      // Move to the next screen or perform other actions as needed
-      moveToRandomLetterScreen();
+      window.location.href = 'score.html';
+
     }
 
     // Function to set the next player's turn
